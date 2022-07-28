@@ -1,11 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+        <View>
+            <Text style={styles.titulo}> Previsão do Tempo </Text>
+        </View>
+        <View style={styles.bloco}>
+            <Text style={styles.label}>Cidade: </Text>
+            <TextInput 
+              placeholder='Digite aqui sua cidade'
+              style={styles.input}
+            />
+        </View>
+        <View style={styles.bloco}>
+          <TouchableOpacity style={styles.botao}>
+            <Text style={styles.textoBotao}>Buscar</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View>
+
+        </View>
     </View>
   );
 }
@@ -13,8 +30,31 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
+  titulo:{
+    marginTop:30,
+    fontSize:30,
+    textAlign:'center'
+  },
+  label:{
+    fontSize:20
+  },
+  bloco:{
+    marginTop:30,
+    marginLeft:'20%'
+  },
+  input:{
+    borderBottomWidth:2,
+    width:'80%',
+    fontSize:20
+  },
+  botao:{
+    width:'80%',
+    backgroundColor:'#000',
+    alignItems:'center'
+  },
+  textoBotao:{
+    fontSize:20,
+    color:'#FFF'
+  }
 });
