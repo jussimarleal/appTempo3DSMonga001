@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList} from 'react-native';
 import Tempo from './components/Tempo';
 
 import Api from  './components/Api';
@@ -9,8 +9,8 @@ export default function App() {
   const [dados, setDados] = useState("");
 
   async function buscaCep(){
-    const response = await Api.get(`weather?array_limit=1&fields=only_results,temp,city_name,forecast,max,min,date,description&key=02470d6b&city_name=${cidade},SP`);
-    setDados(response.data.forecast[0]);
+    const response = await Api.get(`weather?array_limit=10&fields=only_results,temp,city_name,forecast,max,min,date,description&key=02470d6b&city_name=${cidade},SP`);
+    setDados(response.data.forecast);
   }
   return (
     <View style={styles.container}>
@@ -30,7 +30,22 @@ export default function App() {
           <Text style={styles.textoBotao}>Buscar</Text>
         </TouchableOpacity>
       </View>
+      {/* 
       <Tempo data={dados}/>
+      */}
+      <FlatList
+        data={dados}
+        renderItem={({item})=>{
+          return(
+            <View style={styles.tempo}>
+                <Text>Data: {item.date}</Text>
+                <Text>Max: {item.max}</Text>
+                <Text>Min: {item.min}</Text>
+                <Text>Min: {item.description}</Text>
+            </View>
+          );
+        }}
+      />
     </View>
   );
 }
@@ -38,6 +53,11 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  tempo:{
+    marginLeft:'10%',
+    marginBottom:10,
+
   },
   bloco:{
     alignItems:'center',
